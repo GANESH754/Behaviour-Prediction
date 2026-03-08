@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psyche Atlas — Personality Assessment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+  </div>
+
+  <div class="app">
+
+    <!-- Site Header -->
+    <header class="site-header">
+      <div class="logo">
+        <span class="logo-main">Psyche</span><span class="logo-accent">Atlas</span>
+      </div>
+      <p class="logo-sub">Behavioral Personality Assessment</p>
+    </header>
+
+    <!-- ═══════════════════════════════════════
+         SCREEN 1 — INTRO
+    ════════════════════════════════════════ -->
+    <section class="screen active" id="screen-intro">
+      <div class="card intro-card">
+        <div class="intro-ornament" aria-hidden="true">◈</div>
+        <h1 class="intro-title">Understand How You Think, Feel &amp; Act</h1>
+        <p class="intro-body">
+          12 honest questions. 5 behavioral indicators. A precise profile of how
+          you navigate decisions, relationships, challenges, and growth.
+        </p>
+        <div class="indicator-pills" role="list">
+          <span class="pill pill-social"   role="listitem">Social Orientation</span>
+          <span class="pill pill-decision" role="listitem">Decision Style Strength</span>
+          <span class="pill pill-learning" role="listitem">Learning Adaptability</span>
+          <span class="pill pill-risk"     role="listitem">Risk Handling Balance</span>
+          <span class="pill pill-consist"  role="listitem">Consistency Score</span>
+        </div>
+        <button class="btn btn-primary" id="btn-start">
+          Begin Assessment <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SCREEN 2 — QUIZ
+    ════════════════════════════════════════ -->
+    <section class="screen" id="screen-quiz">
+      <div class="card quiz-card">
+
+        <!-- Progress -->
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span class="progress-label">Progress</span>
+            <span class="progress-count" id="progress-count">1 / 12</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Question Body -->
+        <div class="question-body" id="question-body">
+          <p class="question-number" id="question-number">Question 01</p>
+          <h2 class="question-text"  id="question-text"></h2>
+          <div class="options-list"  id="options-list"  role="radiogroup"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="quiz-nav">
+          <button class="btn btn-ghost" id="btn-back" disabled>← Back</button>
+          <span class="nav-hint" id="nav-hint">Select an option</span>
+          <button class="btn btn-primary" id="btn-next" disabled>Next →</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SCREEN 3 — RESULTS
+    ════════════════════════════════════════ -->
+    <section class="screen" id="screen-results">
+      <div class="card results-card">
+
+        <!-- Hero -->
+        <div class="results-hero">
+          <span class="result-icon"  id="result-icon">◈</span>
+          <div class="result-badge">Your Dominant Profile</div>
+          <h2 class="result-name"   id="result-name"></h2>
+          <p class="result-tagline" id="result-tagline"></p>
+        </div>
+
+        <!-- Trait Bars -->
+        <div class="results-section">
+          <h3 class="section-heading">Behavioral Indicator Scores</h3>
+          <div class="trait-bars" id="trait-bars"></div>
+        </div>
+
+        <!-- Radar Chart -->
+        <div class="results-section">
+          <h3 class="section-heading">Profile Radar</h3>
+          <div class="chart-wrap">
+            <canvas id="radar-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="results-section">
+          <h3 class="section-heading">Your Profile Summary</h3>
+          <p class="result-summary" id="result-summary"></p>
+        </div>
+
+        <!-- How Scoring Works -->
+        <div class="scoring-explainer">
+          <h3 class="explainer-title">⚙ How Scoring Works</h3>
+          <p>Every answer option carries hidden weight values across all five behavioral indicators. When you select an answer, those weights are added to your running score for each indicator.</p>
+          <p>At completion, each indicator's raw score is divided by the maximum possible score for that indicator and expressed as a percentage. The indicator with the highest percentage determines your dominant behavioral archetype.</p>
+          <ul class="indicator-legend">
+            <li><span class="legend-dot dot-social"></span><strong>Social Orientation</strong> — How much you rely on others for support, decisions, and energy.</li>
+            <li><span class="legend-dot dot-decision"></span><strong>Decision Style Strength</strong> — How structured and deliberate your decision-making is.</li>
+            <li><span class="legend-dot dot-learning"></span><strong>Learning Adaptability</strong> — Your openness to new experiences, feedback, and growth.</li>
+            <li><span class="legend-dot dot-risk"></span><strong>Risk Handling Balance</strong> — How you manage uncertainty, pressure, and the unknown.</li>
+            <li><span class="legend-dot dot-consist"></span><strong>Consistency Score</strong> — Your tendency toward discipline, routine, and follow-through.</li>
+          </ul>
+        </div>
+
+        <div class="results-footer">
+          <button class="btn btn-primary" id="btn-retake">Retake Assessment</button>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /.app -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
